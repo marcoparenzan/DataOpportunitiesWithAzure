@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Search Employees";
+}
+<label for="employee">@ViewBag.Title</label><input type="text" name="employee" id="employee" /><a href="#" id="search" class="btn btn-primary">Search</a>
+<table class="table" id="result">
+    <thead>
+        <tr>
+            <th>
+                Last Name
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                E-Mail
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#search").click(function () {
+
+                var url = '@Url.Action("SearchEmployees", new { id = "__id__" })'.replace("__id__", $("#employee").val());
+
+                $.getJSON(url, function (response) {
+
+                    var tbody = $("#result tbody");
+                    tbody.empty();
+                    $(response.value).each(function (i, item) {
+
+                        tbody.append("<tr><td>" + item.firstName + "</td><td>" + item.lastName + "</td><td>" + item.title + "</td><td>" + item.email + "</td><td>" + item.phone + "</td></tr>")
+
+                    });
+
+                });
+
+            });
+
+        })
+
+
+
+    </script>    
+    
+}

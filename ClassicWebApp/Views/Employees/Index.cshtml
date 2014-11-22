@@ -1,0 +1,51 @@
+﻿@model Models.IPage<Models.Employee>
+@{
+    ViewBag.Title = "Employees";
+    var statusText = Model.Status.ToString();
+    var statusClass = Model.Status == Models.PageStatus.Cached ? "label label-warning" : "label label-primary";
+}
+Status <label class="@statusClass">@statusText</label>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Last Name
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                E-Mail
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Rows)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
